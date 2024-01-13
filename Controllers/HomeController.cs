@@ -25,7 +25,7 @@ public class HomeController : Controller {
     }
 
     [HttpPost]
-    public IActionResult Prenota(Prenotazione p) {
+    public IActionResult Conferma(Prenotazione p) {  
         return View(p);
     }
 

@@ -1,0 +1,41 @@
+@model Prenotazione
+@{
+    ViewData["Title"] = "Conferma";
+    
+}
+
+<div class="text-center w-50 mx-auto">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+
+    @if(Model != null) {
+        <div class="alert alert-success w-75 mx-auto" role="alert">
+            Prenotazione effetuata con successo:
+            <ul class="list-group w-75 mx-auto my-2">
+                <li class="input-group bg-transparent d-flex ">
+                    <span class="input-group-text w-50">Nome</span>
+                    <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.Nome" readonly>
+                </li>
+                <li class="input-group bg-transparent d-flex">
+                    <span class="input-group-text w-50">Cognome</span>
+                    <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.Cognome" readonly>
+                </li>
+                <li class="input-group bg-transparent d-flex">
+                    <span class="input-group-text w-50">Email</span>
+                    <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.Email" readonly>
+                </li>
+                <li class="input-group bg-transparent d-flex">
+                    <span class="input-group-text w-50">Sesso</span>
+                    <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.GetSesso()" readonly>
+                </li>
+                <li class="input-group bg-transparent d-flex">
+                    <span class="input-group-text w-50">Data di Nascita</span>
+                    <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.DataDiNascita" readonly>
+                </li>
+                <li class="input-group bg-transparent d-flex">
+                    <span class="input-group-text w-50">Ruolo</span>
+                    <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.GetRuolo()" readonly>
+                </li>
+            </ul>
+        </div>
+    }   
+</div>

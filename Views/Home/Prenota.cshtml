@@ -7,7 +7,7 @@
 <div class="text-center w-50 mx-auto">
     <h1 class="display-4">@ViewData["Title"]</h1>
 
-    <form class="w-75 mx-auto" method="post" asp-action="Prenota">
+    <form class="w-75 mx-auto" method="post" asp-action="Conferma">
         <div class="form-group d-flex align-items-center justify-content-center mb-2">
             <label asp-for="Nome" class="w-25 text-end">Nome</label>
             <div class="w-75">
@@ -62,35 +62,4 @@
         </div>
         <button type="submit" class="btn btn-primary w-25 mb-2">Prenota</button>
     </form>
-    @if(Model != null) {
-        <div class="alert alert-success w-75 mx-auto" role="alert">
-            Prenotazione effetuata con successo:
-            <ul class="list-group w-75 mx-auto my-2">
-                <li class="input-group bg-transparent d-flex ">
-                    <span class="input-group-text w-50">Nome</span>
-                    <input class="input-group-text w-50 bg-light text-start" value="@Model.Nome" readonly>
-                </li>
-                <li class="input-group bg-transparent d-flex">
-                    <span class="input-group-text w-50">Cognome</span>
-                    <input class="input-group-text w-50 bg-light text-start" value="@Model.Cognome" readonly>
-                </li>
-                <li class="input-group bg-transparent d-flex">
-                    <span class="input-group-text w-50">Email</span>
-                    <input class="input-group-text w-50 bg-light text-start" value="@Model.Email" readonly>
-                </li>
-                <li class="input-group bg-transparent d-flex">
-                    <span class="input-group-text w-50">Sesso</span>
-                    <input class="input-group-text w-50 bg-light text-start" value="@Model.GetSesso()" readonly>
-                </li>
-                <li class="input-group bg-transparent d-flex">
-                    <span class="input-group-text w-50">Data di Nascita</span>
-                    <input class="input-group-text w-50 bg-light text-start" value="@Model.DataDiNascita" readonly>
-                </li>
-                <li class="input-group bg-transparent d-flex">
-                    <span class="input-group-text w-50">Ruolo</span>
-                    <input class="input-group-text w-50 bg-light text-start" value="@Model.GetRuolo()" readonly>
-                </li>
-            </ul>
-        </div>
-    }   
 </div>
