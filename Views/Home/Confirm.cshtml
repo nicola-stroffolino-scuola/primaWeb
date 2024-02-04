@@ -1,0 +1,39 @@
+@model User
+@{
+    ViewData["Title"] = "Sign Up Confirmation";
+}
+
+<div class="text-center w-50 mx-auto">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    @if(Model != null) {
+        <div class="alert alert-success w-75 mx-auto" role="alert">
+            Signed Up Successfully:
+                <ul class="list-group w-75 mx-auto my-2">
+                    <li class="input-group bg-transparent d-flex ">
+                        <span class="input-group-text w-50">Name</span>
+                        <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.Name" readonly>
+                    </li>
+                    <li class="input-group bg-transparent d-flex">
+                        <span class="input-group-text w-50">Surname</span>
+                        <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.Surname" readonly>
+                    </li>
+                    <li class="input-group bg-transparent d-flex">
+                        <span class="input-group-text w-50">Email</span>
+                        <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.Email" readonly>
+                    </li>
+                    <li class="input-group bg-transparent d-flex">
+                        <span class="input-group-text w-50">Gender</span>
+                        <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.GetGender()" readonly>
+                    </li>
+                    <li class="input-group bg-transparent d-flex">
+                        <span class="input-group-text w-50">Date Of Birth</span>
+                        <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.DateOfBirth" readonly>
+                    </li>
+                    <li class="input-group bg-transparent d-flex">
+                        <span class="input-group-text w-50">Role</span>
+                        <input class="input-group-text w-50 bg-light text-start text-dark" value="@Model.GetRole()" readonly>
+                    </li>
+                </ul>
+        </div>
+    }   
+</div>

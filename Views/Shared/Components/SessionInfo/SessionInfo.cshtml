@@ -1,0 +1,11 @@
+@model SessionInfo
+@{
+    var userId = (int?) TempData["user_id"] ?? null;
+}
+
+@if(userId != null && Model.Context != null ) {
+    var currentUser = Model.Context.User.Where(u => u.UserId == userId).ElementAt(0);
+    <span class="navbar-text">
+        @currentUser.Name @currentUser.Surname (@currentUser.Email)
+    </span>
+}

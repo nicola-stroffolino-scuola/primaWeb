@@ -26,14 +26,21 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Prenota">Prenota</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Products">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Cart">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="SignUp">Sign Up</a>
                         </li>
                     </ul>
+                    @await Component.InvokeAsync("SessionInfo")
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" id="body">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

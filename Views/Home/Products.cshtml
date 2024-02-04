@@ -1,0 +1,76 @@
+﻿@model SessionInfo
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <div class="container">
+        <div>
+            @foreach(var item in Model.Context!.Product) {
+                <div class="bg-body-secondary mb-3 mx-auto w-75 d-flex rounded" style="height: 150px;">
+                    <div class="my-2 mx-4 w-25">
+                        <img src="https://www.svgrepo.com/show/84626/delivery-cart.svg" id="prod-img" class="w-100 h-100 p-2 border border-black rounded">
+                    </div>
+                    <div class="my-2 w-75 d-flex">
+                        <div class="w-50 me-4 rounded">
+                            <div class="text-break h-25 overflow-hidden px-3 d-flex bg-body rounded-top">
+                                <div class="m-auto">
+                                    @item.Name
+                                </div>
+                            </div>
+                            <div class="text-break h-75 overflow-y-scroll px-3 py-1 bg-body-tertiary rounded-bottom ">
+                                @item.Description
+                            </div>
+                        </div>
+                        <div class="w-25 me-4 d-flex align-items-center border rounded">
+                            <div class="w-100 mx-auto px-2 fs-3">
+                                € @item.Price
+                            </div>
+                        </div>
+                        <div class="w-25 me-4 h-100 d-flex align-items-center align-self-center">
+                            @{
+                                bool productInCart = Model.UserId != null ?
+                                    Model.Context.Cart.Where(u => u.UserId == Model.UserId).Any(p => p.ProductId == item.ProductId) :
+                                    false;                                
+                                
+                                @if(productInCart) {
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#quantity-modal-@item.ProductId" class="h-100 mx-auto p-2 rounded bg-secondary d-flex align-items-center border-0" disabled>
+                                        <img src="https://www.svgrepo.com/show/477442/shopping-cart-21.svg" id="cart-img" class="w-50 mx-auto">
+                                    </button>
+                                } else {
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#quantity-modal-@item.ProductId" class="h-100 mx-auto p-2 rounded bg-secondary d-flex align-items-center border-0">
+                                        <img src="https://www.svgrepo.com/show/477473/shopping-cart-16.svg" id="cart-img" class="w-50 mx-auto">
+                                    </button>
+                                }    
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->      
+                <div class="modal fade" id="quantity-modal-@item.ProductId" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">   
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Quantity</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="post" asp-action="AddToCart">
+                                <div class="modal-body">
+                                    <label for="quantity-slider" class="form-label">Set quantity for @item.Name:</label>
+                                    <input asp-for="Cart.Quantity" type="number" class="form-control" min="1" max="20" step="1" value="1" id="quantity-slider">
+                                    <input asp-for="Cart.ProductId" type="hidden" value="@item.ProductId" />
+                                    <input asp-for="Cart.UserId" type="hidden" value="@Model.UserId" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" id="add-to-cart-btn">Add to Cart</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>  

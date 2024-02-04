@@ -1,0 +1,29 @@
+#prod-img {
+    filter: invert(30%) sepia(2%) saturate(3118%) hue-rotate(170deg) brightness(89%) contrast(86%);
+}
+
+#cart-img {
+    filter: invert(100%) sepia(2%) saturate(3118%) hue-rotate(170deg) brightness(89%) contrast(86%);
+}
+
+body::-webkit-scrollbar {
+	width: 12px;
+	background-color: #ffffff00;    
+}
+
+body::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #464E56;
+}
+
+.overflow-y-scroll::-webkit-scrollbar {
+    width: 12px;
+	background-color: #ffffff00;
+}
+
+.overflow-y-scroll::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #464E56;
+}

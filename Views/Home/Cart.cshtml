@@ -1,0 +1,52 @@
+﻿@model SessionInfo
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    @if(Model.Cart == null || Model.Context.Cart.Where(c => c.UserId == Model.Cart.UserId).Count() == 0) {
+        <div>Cart is empty.</div>
+    } else {
+        var cartProductIds = Model.Context!.Cart.Where(c => c.UserId == Model.Cart.UserId).Select(c => c.ProductId);
+        var productsInCart = Model.Context!.Product.Where(p => cartProductIds.Contains(p.ProductId));
+        @foreach(var item in productsInCart) {
+            var quantity = Model.Context!.Cart.Where(c => c.UserId == Model.Cart.UserId && c.ProductId == item.ProductId).ElementAt(0).Quantity;
+            <form method="post" asp-action="Order">
+                <input type="hidden" asp-for="Cart.UserId" value="@Model.Cart.UserId">
+                <input type="hidden" asp-for="Cart.ProductId" value="@item.ProductId">
+                <input type="hidden" asp-for="Cart.Quantity" value="@quantity">
+                <div class="bg-body-secondary mb-3 mx-auto w-75 d-flex rounded" style="height: 150px;">
+                    <div class="my-2 mx-4 w-25">
+                        <img src="https://www.svgrepo.com/show/84626/delivery-cart.svg" id="prod-img" class="w-100 h-100 p-2 border border-black rounded">
+                    </div>
+                    <div class="my-2 w-75 d-flex">
+                        <div class="w-50 me-4 rounded">
+                            <div class="text-break h-25 overflow-hidden px-3 d-flex bg-body rounded-top">
+                                <div class="m-auto">
+                                    @item.Name
+                                </div>
+                            </div>
+                            <div class="text-break h-75 overflow-y-scroll px-3 py-1 bg-body-tertiary rounded-bottom ">
+                                @item.Description
+                            </div>
+                        </div>
+                        <div class="w-25 me-4 d-flex align-items-center border rounded">
+                            <div class="w-100 mx-auto px-2 fs-5">
+                                @{ var totalPrice = Math.Round(item.Price * quantity, 2); }
+                                € @totalPrice
+                            </div>
+                        </div>
+                        <div class="w-25 me-4 h-100 d-flex align-items-center align-self-center">
+                            <button id="order-btn-@item.ProductId" type="submit" class="w-100 h-100 mx-auto p-2 rounded bg-primary d-flex align-items-center border-0">
+                                <div class="w-100">
+                                    Ordina <br> (€ @item.Price <span>x</span>@quantity)
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+    }
+</div>
